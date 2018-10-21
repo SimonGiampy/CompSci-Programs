@@ -1,12 +1,13 @@
-/*
-   somma dei cubi delle sue cifre è il numero stesso
-   numero di armstrong 371:
-    3^3 = 27
-    7^3 = 343
-    1^3 = 1
-    somma 21+343+1=371
- */
-
+// Scrivere un programma che, dati in input due interi a e b non negativi,
+// stampi a video tutti i numeri di Armstrong compresi tra a e b.
+//
+// NOTA: un numero di 3 cifre e' di Armstrong se la somma dei cubi delle sue
+// cifre e' uguale al numero stesso.
+// Esempio: 371 e' di Armstrong perche'
+//      3^3 = 27
+//      7^3 = 343
+//      1^3 = 1
+//      e 27 + 343 + 1 = 371
 #include <math.h>
 #include <stdio.h>
 
@@ -16,12 +17,11 @@ unsigned int cifraInPosizione(unsigned int input, unsigned int n);
 
 int main() {
 	unsigned int i;
+	int a, b;
 
-	int a = 1, b = 1000; //numeri compresi tra a e b
-
-	printf("a: ");
+	printf("numero di partenza: \n");
 	scanf("%d", &a);
-	printf("b: ");
+	printf("numero di arrivo: \n");
 	scanf("%d", &b);
 	printf("\n");
 
@@ -37,10 +37,10 @@ int main() {
 int isArmstrong(unsigned int num) {
 	int somma = 0;
 	int cifra;
-	int order = ordine(num);
-	for (int i = 1; i <= order; i++) {
+	int grandezza = ordine(num);
+	for (int i = 1; i <= grandezza; i++) {
 		cifra = cifraInPosizione(num, i);
-		somma = somma + pow(cifra, 3);
+		somma = somma + pow(cifra, grandezza);
 	}
 
 	if (somma == num) {
@@ -52,11 +52,10 @@ int isArmstrong(unsigned int num) {
 
 unsigned int ordine(unsigned int num) {
 	int ordine = 0;
-	do  {
+	while (num != 0) {
 		num = num / 10;
 		ordine++;
-	} while (num != 0);
-
+	}
 	return ordine;
 }
 
