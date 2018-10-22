@@ -23,11 +23,12 @@ int main() {
 	//assign random values to mX and mY
 	srand(time(NULL));
 
-	unsigned long int points = 1000000000, i; //the more the points are, the more precise the calculation is. here I used 1M
+	unsigned long int points = 10000000000, i; //the more the points are, the more precise the calculation is. here I used 10B
 	unsigned long int inside = 0;
 	unsigned long int outside = 0;
 	double radius;
 
+	//calculation of the position of the points
 	for (i = 0; i < points; i++) {
 		mX = generateMx();
 		mY = generateMy();
@@ -42,13 +43,8 @@ int main() {
 	printf("outside: %lu\n", outside);
 	printf("inside: %lu\n", inside);
 
-	double pi;
-	pi = (double) inside / ((double) outside);
-	printf("pi greco (interni / esterni) = %.15lf\n", pi);
-	pi = (double) outside / ((double) inside);
-	printf("pi greco (esterni / interni) = %.15lf\n", pi);
-	pi = (double) inside / ((double) points) * 4.0;
-	printf("pi greco (interni / punti tot) *4= %.15lf\n", pi);
+	double pi = (double) inside / ((double) points) * 4.0;
+	printf("pi greco (interni / punti tot) *4 = %.15lf\n", pi);
 
 	return 0;
 }
