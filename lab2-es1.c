@@ -1,9 +1,9 @@
 /*
    Scrivere un programma che chieda all’utente di inserire un numero intero n e ne calcoli la scomposizione in fattori primi (e.g., 10 = 1x2x5, 18 = 1x2x3x3).
  */
-
 #include <stdio.h>
 
+//function that shows if a number is prime or not
 int primo(int n);
 
 int main() {
@@ -24,15 +24,23 @@ int main() {
 			if (i == 1) {
 				printf("1\n");
 			} else {
-				//shows if a determined number is prime and shows 1 or 0 (function primo)
-				//printf("pri(%d):%d\n", i, primo(i));
+				//checks if a determined number is prime and takes 1 or 0 (function primo)
 				if (primo(i)) {
+					//if it is prime (so it is a possible divisor) checks if the number is divisible for it
 					if (num % i == 0) {
+						//shows the divisor found
 						printf("%d * ", i);
+						//divides the number for i, so it checks the other numbers below it
 						num = num / i;
+
+						//sets the iterator at a position which is equal to the factor just found
 						if (i > num) {
 							i = num;
 						}
+
+						//i is increased by one, so the cycle checks if the number is divisible again
+						//for the prime number found. example:20 = 5*2*2 (2 is checked as divisor multiple times
+						//as long as the result of the division is not divisible anymore)
 						i++;
 					}
 				}
