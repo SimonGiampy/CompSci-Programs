@@ -1,7 +1,8 @@
 #include <stdio.h>
 
-int main()
-{
+//prints the times table (tabellina delle moltiplicazioni)
+//this is version solved by the professor, so this is his code
+int main() {
 	int n,k,i,j;
 	printf("Inserire n: ");
 	scanf("%d",&n);

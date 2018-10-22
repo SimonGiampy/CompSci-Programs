@@ -1,5 +1,5 @@
 /*
-   inserire sequenza numeri interi terminata da zero, dopo dice quale è il min e quale è il max
+   inserire sequenza numeri interi terminata da zero, dopo dice quale è il min e quale è il max della sequenza insrita (senza contare lo zero finale)
  */
 
 #include <stdio.h>

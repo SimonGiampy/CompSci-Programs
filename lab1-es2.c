@@ -35,6 +35,7 @@ int main() {
 		if (i==1) {
 			for (int j = 0; j<=n; j++) {
 				printf("-------");
+				//there is a bug here that doens't show aligned hyphens with the columns
 			}
 			printf("\n");
 		}
