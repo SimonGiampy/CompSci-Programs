@@ -13,8 +13,9 @@ int main() {
 	int bisestile = 0;
 
 	if (anno % 400 == 0) {
+		//a year which is a multiple of 400 is a lap year, while a year multiple of 100 (and not 400) is not
 		bisestile = 1;
-	} else if (anno % 4 == 0 && anno % 100 != 0 ) {
+	} else if (anno % 4 == 0 && anno % 100 != 0) {
 		bisestile = 1;
 	}
 
