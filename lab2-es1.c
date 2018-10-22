@@ -17,19 +17,24 @@ int main() {
 	//and the program doesn't get confused
 	if (primo(num)) {
 		printf("1 * %d\n", num);
-	}
-
-	//checks if the number is divisible for the prime numbers below the number itself
-	for (int i = num-1; i >= 1; i--) {
-		//terminates the sequence with a 1 when it ends the iteration
-		if (i == 1) {
-			printf("1\n");
-		} else {
-			//shows if a determined number is prime and shows 1 or 0 (function primo)
-			printf("pri(%d):%d\n", i, primo(i));
-			if (primo(i)) {
-				if (num % i == 0) {
-					//printf("%d * ", i);
+	} else {
+		//checks if the number is divisible for the prime numbers below the number itself
+		for (int i = num-1; i >= 1; i--) {
+			//terminates the sequence with a 1 when it ends the iteration
+			if (i == 1) {
+				printf("1\n");
+			} else {
+				//shows if a determined number is prime and shows 1 or 0 (function primo)
+				//printf("pri(%d):%d\n", i, primo(i));
+				if (primo(i)) {
+					if (num % i == 0) {
+						printf("%d * ", i);
+						num = num / i;
+						if (i > num) {
+							i = num;
+						}
+						i++;
+					}
 				}
 			}
 		}
