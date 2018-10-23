@@ -11,10 +11,10 @@ int main() {
 
 	int stringLength = strlen(string);
 
-	int palyndrome = 0;
-	for (int i = 0; i<100; i++) {
-		if (string[i] == string[stringLength - 1 - i]) {
-			palyndrome = 1;
+	int palyndrome = 1;
+	for (int i = 0; i< 100 /2; i++) {
+		if (string[i] != string[stringLength - 1 - i]) {
+			palyndrome = 0;
 		}
 	}
 	if (palyndrome) {
