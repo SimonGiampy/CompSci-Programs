@@ -16,6 +16,7 @@ int main() {
 
 	int i;
 
+	//TODO: fix the bug where the numbers initialized are the same
 	//initialize arrays randomly, so the user doesn't bother writing in input all the numbers
 	srand(time(NULL)); //use random seed retrieved from time
 	for (i=0; i<rows; i++) {
