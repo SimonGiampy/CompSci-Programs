@@ -10,11 +10,35 @@
  */
 #include <stdio.h>
 
-int main() {
+void printRow(int n);
 
+int main() {
 	int length;
 	scanf("%d", &length);
 
+	printRow(length);
 
 	return 0;
+}
+
+void printRow(int n) {
+	if (n != 1) {
+		printRow(n-1);
+	}
+
+
+	for (int i = 0; i <= n; i++) {
+		if (i==0 || i==n) {
+			printf("+");
+		} else if (n % 2 != 0 && i == (n/2)) {
+			printf("|-");
+			i++;
+		} else if (n % 2 == 0 && i == (n/2)) {
+			printf("|");
+			i++;
+		} else {
+			printf("-");
+		}
+	}
+	printf("\n");
 }
