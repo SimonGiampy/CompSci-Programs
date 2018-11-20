@@ -6,6 +6,7 @@
  +|+
  +-|-+
  +--|--+
+ +---|---+
    Nota: Provare ad implementare ricorsivamente anche la funzione che stampa l’intero albero di Natale.
  */
 #include <stdio.h>
@@ -22,7 +23,11 @@ int main() {
 }
 
 void printRow(int n) {
+	if (n == 1) {
+		printf("    +\n");
+	} else {
 
+	}
 }
 
 /*temp:
