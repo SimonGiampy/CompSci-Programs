@@ -6,13 +6,13 @@
 #include <stdio.h>
 #include <time.h>
 
-//main method to define a dynamic list
+//main method to define a dynamic linked list
 typedef int data;
 struct node {
 	data element;
 	struct node *next; //recursive declaration of struct
 };
-typedef struct node *list; //strut of pointers, this is the declaration of a list
+typedef struct node *list; //struct of pointers, this is the declaration of a linked list
 
 //declarations
 int length(list l);
@@ -25,16 +25,18 @@ list removeHead(list l);
 list removeTail(list l);
 list removeElement(list l, data element);
 void printList(list l);
+void printAllRecursive(list l);
+list insertAscending(list l, int element);
+list insertAscendingRecursive(list l, int element);
+
 
 /*
-   //-------------------------------------------------------------------------------------------------------------------
    //other equivalent method
    typedef int data2;
    typedef struct {
     data2 element;
     node2 *next2;
    } node2;
-   //-------------------------------------------------------------------------------------------------------------------
  */
 //-------------------------------------------------------------------------------------------------------------------
 //retrieves length of a given list in input
@@ -64,7 +66,7 @@ int lengthRecursive(list l) {
 list search(list l, data element) { //returns an elementof the list if the element in input as parameter is found
 	printf("searching element %d with method 1 in the list: \n", element);
 	while (l != NULL) { //iterates until there are not elements in the list anymore
-		if (l->next == element) { //element in the list is equal to the element to be searched
+		if (l->element == element) { //element in the list is equal to the element to be searched
 			printf("element has been found in the list\n");
 			return l; //element found in the list
 		} else {
@@ -187,12 +189,61 @@ void printList(list l) {
 	} else {
 		printf("list: ");
 		while (l->next != NULL) {
-			printf("%3d", l->next);
+			printf("%3d", l->element);
 		}
 		printf("\n");
 	}
 }
+//-------------------------------------------------------------------------------------------------------------------
+//prints every single element but in a recursive way
+void printAllRecursive(list l) {
+	if (l == NULL) {
+		printf("end\n");
+	} else {
+		printf("%d --> ", l->element);
+		printAllRecursive(l->next);
+	}
+}
+//-------------------------------------------------------------------------------------------------------------------
+//adds a new item so the entire list is always written in ascending order
+list insertAscending(list l, int element) {
+	struct node *p, *current = l, *previous = NULL;
+	p = malloc(sizeof(struct node));
+	p->element = element;
 
+	while (current != NULL &&current->element < element) {
+		//firstly checks the fisrt condition, then if it is met, it checks the second one
+		previous = current;
+		current = current->next;
+	}
+
+	p->next = current;
+	if (previous!= NULL) {
+		previous->next = p;
+	}
+
+	if (previous !=  NULL) {
+		return l;
+	} else {
+		return p;
+	}
+}
+//-------------------------------------------------------------------------------------------------------------------
+//it's the same thing as the function above, but it does it in a recursive way
+list insertAscendingRecursive(list l, int element)  {
+	struct node *p;
+	if (l == NULL || element < l->element) {
+		p = malloc(sizeof(struct node));
+		p->element = element;
+		p->next = NULL;
+		//return p;
+		l = p;
+	} else {
+		l->next = insertAscendingRecursive(l->next, element);
+		//return l;
+	}
+	return l;
+}
 //-------------------------------------------------------------------------------------------------------------------
 //-------------------------------------------------------------------------------------------------------------------
 
@@ -200,8 +251,6 @@ int main() {
 	list l1 = NULL; //head of a new list is initialized as NULL
 	l1 = insertHead(l1, 5);
 	l1 = insertHead(l1, 6);
-	l1 = insertHead2(&l1, 7); //variation with address of list
 
-	//TODO add other methods, and debug all of them
 	//TODO create a library to access all the methods of the list, instead of writing all of them again
 }
