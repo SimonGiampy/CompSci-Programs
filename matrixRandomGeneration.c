@@ -10,7 +10,7 @@ int main() {
 	int a[rows][columns], b[rows][columns];
 	//use this code to retrieve the lenght of the array: (int)(sizeof(array) / sizeof(array[0])
 
-	srand(time(NULL)); //generate random see using the time in seconds, calculated from 1970 to the present
+	srand(time(NULL)); //generate random seed using the time in seconds, calculated from 1970 to the present
 
 	for (int i=0; i<rows; i++) {
 		for (int j=0; j<columns; j++) {
