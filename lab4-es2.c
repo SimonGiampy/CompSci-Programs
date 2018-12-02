@@ -1,233 +1,74 @@
 #include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
 
-typedef int data;
-struct nodo {
-	data el;
-	struct nodo *next;
-};
-typedef struct nodo *lista;
+void fun1(FILE *f1, FILE *f2) {
+	/* exercise about files
+	   f1 points to a binary FILE in read mode
+	   f2 points to a text file in write mode
+	   f1 contains a sequence of a couple of integer values v1 and v2. v1 is the ascii correspondece for a character, v2 the number of times it is repeated
+	   the sequences must be separated from a space
 
-// Tutte le seguenti funzioni hanno un parametro intero ric se uguale ad 1 viene
-// eseguita la versione ricorsiva, altrimenti vieni eseguita quella iterativa
+	   example:
+	   file 1 content: 97 3 98 5
+	   file 2 content: aaa bbbbb
+	 */
 
-// Calcola e ritorna la lunghezza della lista
-int lunghezza (lista l, int ric);
+	//FILE *file1 = fopen("compiler/bin", "r");
 
-// Ricerca (il primo) elemento el nella lista l e ritorna il puntatore a
-// quell'elemento (o NULL se l'elemento non è presente)
-lista ricerca (lista l, data el, int ric);
+	while (!feof(f1)) {     //while it hasn't reached the end of file yet
+		int arrays[2];     //contains v1 and v2
+		//read two integers (v1 and v2)
 
-// Inserisce un elemento el in testa alla lista l modificandola
-void inserisci_in_testa (lista *l, data el);
+		//write the character v1 as many times as v2
 
-// Inserisce un elemento el in coda alla lista l modificandola
-void inserisci_in_coda (lista *l, data el, int ric);
-
-// Rimuove l'elemento in testa alla lista l modificandola
-void rimuovi_in_testa (lista *l);
-
-// Rimuove l'elemento in coda alla lista l modificandola
-void rimuovi_in_coda (lista *l, int ric);
-
-// Rimuove (il primo) elemento el nella lista l (se presente) modificandola
-void rimuovi (lista *l, data el, int ric);
-
-// Stampa il contenuto della lista l
-void stampa (lista l, int ric);
-
-
-/* VERSIONI ITERATIVE/RICORSIVE DA IMPLEMENTARE */
-int lunghezza_ric(lista l);
-int lunghezza_iter(lista l);
-
-lista ricerca_ric(lista l, data el);
-lista ricerca_iter(lista l, data el);
-
-void inserisci_in_coda_ric (lista *l, data el);
-void inserisci_in_coda_iter (lista *l, data el);
-
-void rimuovi_in_coda_ric (lista *l);
-void rimuovi_in_coda_iter (lista *l);
-
-void rimuovi_ric (lista *l, data el);
-void rimuovi_iter (lista *l, data el);
-
-void  stampa_ric (lista l);
-void  stampa_iter (lista l);
-
-/*************************************************/
-
-int lunghezza (lista l, int ric) {
-	if (ric==1)
-		return lunghezza_ric(l);
-	else
-		return lunghezza_iter(l);
-}
-lista ricerca (lista l, data el, int ric) {
-	if (ric==1)
-		return ricerca_ric(l,el);
-	else
-		return ricerca_iter(l,el);
-}
-void inserisci_in_coda (lista *l, data el, int ric) {
-	if (ric==1)
-		inserisci_in_coda_ric(l,el);
-	else
-		inserisci_in_coda_iter(l,el);
-}
-void rimuovi_in_coda (lista *l, int ric) {
-	if (ric==1)
-		rimuovi_in_coda_ric(l);
-	else
-		rimuovi_in_coda_iter(l);
-}
-void rimuovi (lista *l, data el, int ric) {
-	if (ric==1)
-		rimuovi_ric(l,el);
-	else
-		rimuovi_iter(l,el);
-}
-void stampa (lista l, int ric) {
-	if (ric==1)
-		stampa_ric(l);
-	else
-		stampa_iter(l);
-}
-//done
-int lunghezza_ric(lista l) {
-	if (l==NULL)
-		return 0;
-	else
-		return 1 + lunghezza_ric(l->next);
-}
-//done
-int lunghezza_iter(lista l) {
-	int num = 0;
-	while (l != NULL) { //iterates as long as the node in the list is not null
-		//continues in this cycle as long as the list is not finished
-		num++;
-		l = l->next; //ppints to the next element of the list
-	}
-	return num;
-}
-
-lista ricerca_ric(lista l, data el) {
-	if (l == NULL || l->el == el)
-		return l;
-	else
-		return ricerca_ric(l->next,el);
-}
-
-lista ricerca_iter(lista l, data el) {
-	while (l!= NULL) {
-		if ((*l).el == el) {
-			return l;
-		} else {
-			l = (*l).next;
+		int readStuff = fread(arrays, sizeof(int), 2, f1);     //reads binary file, puts the stuff read in the array v, reads the size of an int, 2 times
+		if (readStuff != 2) {
+			return;     //error in reading file
 		}
-	}
-	return NULL;
-}
 
-void inserisci_in_coda_ric (lista *l, data el) {
-	//TODO
-}
-
-void inserisci_in_coda_iter (lista *l, data el) {
-
-
-}
-
-void inserisci_in_testa(lista *l, data el) {
-	lista temp; //new list named temp
-	//other version of same line above:     list temp;
-	temp = NULL; //allocates memory for a new list
-	temp->el = el; //points to the first element of the list and sets it as the element in input
-	temp->next = *l; //the next element points to the old first element of the list
-	//returns a new element of the list, which is the one inserted at the head
-	*l = temp;
-}
-
-void rimuovi_in_coda_ric (lista *l) {
-	//TODO
-}
-
-void rimuovi_in_coda_iter (lista *l) {
-	//TODO
-}
-
-void rimuovi_in_testa (lista *l) {
-	//TODO
-}
-
-void rimuovi_ric (lista *l, data el) {
-	//TODO
-}
-
-void rimuovi_iter (lista *l, data el) {
-	//TODO
-}
-
-void  stampa_ric (lista l) {
-	//TODO
-}
-
-void  stampa_iter (lista l) {
-	//TODO
-}
-
-
-
-
-
-int main() {
-	lista l=NULL;
-	int i,n,ric;
-	srand(time(NULL));
-	printf("Che versione vuoi testare? (0 iterativa, 1 ricorsiva) ");
-	scanf("%d%*c",&ric);
-	n = rand()%10 +1;
-	for (i=0; i<n; i++) {
-		int x = rand()%10;
-		if (rand()%2>0) {
-			printf("Inserisci in testa %d\n",x);
-			inserisci_in_testa(&l,x);
-		} else {
-			printf("Inserisci in coda %d\n",x);
-			inserisci_in_coda(&l,x,ric);
+		for (int i = 0; i<arrays[1]; i++) {
+			fputc(arrays[0], f2);
 		}
-		printf("Lista (l=%d): ",lunghezza(l,ric));
-		stampa(l,ric);
+		fputc(' ', f2);
+		fprintf(f2, "%s\n", " ");
 	}
-	//ricerca
-	for (i=0; i<n; i++) {
-		int x = rand()%10;
-		printf("Ricerca di %d: ",x);
-		if (ricerca(l,x,ric)==NULL)
-			printf("non trovato\n");
-		else
-			printf("trovato\n");
+}
+
+void fun(char *f1, char *f2) {
+	FILE *file1 = fopen(f1, "rb");
+	if (file1 == NULL) {
+		return;
+	}
+	FILE *file2 = fopen(f2, "w");
+	if (file2 == NULL) {
+		fclose(file1);
+		return;
+	}
+}
+
+void fun2(FILE *f1, FILE *f2) {
+	/*
+	   f1 and f2 are two binary files opened in read/write
+	   f1 contains a sequence of integer numbers
+	   he programs write in f2 the even numbers of the sequence in f1, but in reverse order
+	 */
+
+	int x, r;
+	r = fseek(f1, -sizeof(int), SEEK_END);
+	if (r != 0) {
+		return;
 	}
 
-	for (i=0; i<n+n/2; i++) {
-		int choice = rand()%3;
-		if (choice==0)      {
-			printf("Rimuovi in testa\n");
-			rimuovi_in_testa(&l);
+	while (r == 0) { //until fseek has success in moving around the file
+		//another option is ftell
+		fread(&x, sizeof(int), 1, f1);
+		if (x%2 == 0) {
+			fwrite(&x, sizeof(int), 1, f2);
 		}
-		else if (choice==1) {
-			printf("Rimuovi in coda\n");
-			rimuovi_in_coda(&l,ric);
-		} else {
-			int x = rand()%10;
-			printf("Rimuovi %d\n",x);
-			rimuovi(&l,x,ric);
-		}
-		printf("Lista (l=%d): ",lunghezza(l,ric));
-		stampa(l,ric);
+		r = fseek(f1, -2 * sizeof(int), SEEK_CUR);
 	}
+}
 
+int main(int argc, char const *argv[]) {
+	/* code */
 	return 0;
 }
