@@ -6,6 +6,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+
+#define DIR "textfile.tmp.txt"
+
 //linked list declaration
 typedef struct giovanni {
 	char character;
@@ -13,9 +16,23 @@ typedef struct giovanni {
 } gianfranco;
 typedef gianfranco *list;
 
-list upload(char filename[]);
-void save(list l, char filename[]);
+list upload(char const filename[]);
+void save(list l, char const filename[]);
 list insert(list, char ch);
+void printList(list l);
+
+void printList(list l) {
+	if (l == NULL) {
+		printf("list is empty\n");
+	} else {
+		printf("printing list:");
+		while (l != NULL) {
+			printf("%4c", l->character); //puts some space between a number and another
+			l = l->next;
+		}
+		printf("\n");
+	}
+}
 
 list insert(list l, char ch) { //inserts new values in a linked list
 	list current = l, previous = NULL;
@@ -38,16 +55,16 @@ list insert(list l, char ch) { //inserts new values in a linked list
 	return l;
 }
 
-list upload(char filename[]) {
+list upload(char const filename[]) {
 	FILE *file = fopen(filename, "r");
 	list l = NULL;
 	if (file == NULL) {
-		printf("jonsadnjsadssdklnsanskldklsnkosdnvsdkklnsdvnsklvdnklafnklsdv\n"); //eror message
+		printf("generic error message here\n"); //error message
 		exit(1);
 	}
 	int n;
 	char ch;
-	int read = fscanf(file, "%c%d", &ch, &n);
+	int read = fscanf(file, "%c%d", &ch, &n); //returns the number of data read from the input file
 	while (read == 2) {
 		for (int i = 0; i < n; i++) {
 			l = insert(l, ch);
@@ -58,7 +75,7 @@ list upload(char filename[]) {
 	return l;
 }
 
-void save(list l, char filename[]) {
+void save(list l, char const filename[]) {
 	//writes the sequence in a text file
 	FILE *file; //file where to put all the values
 	char c; //character repeated
@@ -89,9 +106,22 @@ void save(list l, char filename[]) {
 }
 
 int main(int argc, char const *argv[]) {
-	list l;
-	l = upload("input.txt");
-	l = insert(l, 5);
-	save(l, "ouput.txt");
+	/*
+	   list l = NULL;
+	   l = insert(l, 'b');
+	   l = insert(l, 'b');
+	   l = insert(l, 'b');
+	   l = insert(l, 'b');
+	   l = insert(l, 'x');
+	   l = insert(l, 'x');
+	   l = insert(l, 'c');
+	   l = insert(l, 'c');
+	   l = insert(l, 'c');
+	   save(l, DIR);
+	   printList(l);
+	 */
+	list l2 = upload(DIR);
+	printList(l2);
+
 	return 0;
 }
