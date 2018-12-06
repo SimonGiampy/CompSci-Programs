@@ -1,0 +1,100 @@
+Esercizio 4
+Scrivere un programma che legge una sequenza di interi positivi finché non incontra un valore minore od uguale a zero;
+stampa sul nastro di uscita i valori pari letti e la loro somma.
+
+C code:
+
+int x, s=0;
+scanf("%d",&x);
+while (x>0) {
+	if (x%2==0) {
+		printf("%d\n",x);
+		s = s+x;
+	}
+	scanf("%d",&x);			
+}
+printf("%d\n",s);
+
+Translation: 
+
+1. load= 0
+2. store 101 //variable s (sum) = 0 (in cell 101)
+3. store 102 //variable x = 0 in cell 102
+//actually the line above is not really necessary
+4. read //sart the while cycle here
+5. ble 16 //skip after cycle
+6. store 102 //save x in cell 102
+7. div= 2 //multiply x by 2
+8. mult= 2
+9. sub 102 //subtract original value of x
+10. bne 4 //not equal to 0 --> goes back to line 4
+11. load 102
+12. add 101
+13. store 101
+14. br 4 //goes back to line 4
+15. load 101
+16. write
+17. end
+
+second alternative that prints every number at the end
+
+1. load= 0
+2. store 101 //variable s
+3. store 102 //variable n
+4. load= 104
+5. store 103 //v+i
+6. read
+7. ble
+8. store@ 103
+9. div= 2
+10. mult= 2
+11. sub@ 103
+12. bne 6 //now equal to 0, goes to line 6
+13. load 102
+14. add= 1
+15. store 102 //n++
+16. load 103
+17. add 101
+18. store 101
+19. load 103
+20. add = 1
+21. store 103
+22. br 6 //back to read values
+23. load 101 //load sum
+24. write
+//now writes all even numbers
+25. load= 104
+26. store 103
+27. load 102 //variable n
+28. beq 37 //this is the same thing as ble 37 (in this specific case)
+//line 28 ends the program is it is equal to 0
+29. sub= 1
+30. store 102
+31. load@ 103
+32. write
+33. load 103
+34. add= 1
+35. store 103
+36. br 27 //goes to line 27, so it brings back variable n to the accumulator
+37. end
+
+
+third alternative to the assembly code:
+
+1. LOAD= 0
+2. STORE 100
+3. READ
+4. BLE 15
+5. STORE 101
+6. DIV= 2
+7. MULT= 2
+8. SUB 101
+9. BNE 14
+10. LOAD 101
+11. WRITE
+12. ADD 100
+13. STORE 100
+14. BR 3
+15. LOAD 100
+16. WRITE
+17. END
