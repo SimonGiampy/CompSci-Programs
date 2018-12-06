@@ -1,0 +1,16 @@
+Esercizio 3
+Scrivere un programma che legge un numero dal nastro di ingresso e stampa 1 sul nastro di uscita se è pari, viceversa stampa 0
+
+
+1. read //ask for input
+2. store 101 //input stored in variable
+3. div= 2 //divide number stored by 2
+4. mult= 2 //multiply number by 2
+5. sub 101 //subtract number (differenza)
+6. beq 9 //below or equal
+7. load= 0
+8. write
+9. br 10 //skip to line 10
+10. load= 1
+11. write 
+12. end
