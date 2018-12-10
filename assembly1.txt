@@ -1,0 +1,51 @@
+//saves some numbers in an array and prints them in reverse order. stops the input when finds a 0
+n = 0; //cell 101
+p = &x[0]; //cell 103, memorized in pointer (start of array) which is in the cell 102
+do {
+scanf("%d", p);
+n++;
+} while (*(p-1) != 0);
+//second part starts here
+for (i=n-2; i>=0; i--) {
+printf("%d", *(x+i));
+}
+//possible variation
+n--; //cell 101
+p = &x[n]; //cell 102
+while (n >= 0) {
+p--;
+printf("%d", *p);
+n--;
+}
+
+translation
+
+1. load= 0 //load a variable and sets its value directly to 0
+2. store 101 //puts variable in address 101 (n = 0;)
+3. load 103 //first address of array
+4. store 102 //puts variable in address 102 (p = &x[0];)
+5. read //read data (scanf)
+6. beq 15 //end while cycle, stops reading values in input
+7. store@ 102 //address of storage is the address in the content of cell 102. equivalent to store 103
+8. load 102
+9. add= 1 //increment of 1 the pointer
+10. store 102
+11. load 101
+12. add= 1 //increments index of array n++
+13. store 101 //stores variable n
+14. br 5 //goes back to line 5
+//this is the end of the first part of the program, in fact it finishes the while cycle
+//now we can wrote the part of the program of the second while cycle (the alternative one)
+//it iterates the elements of the array in reverse order
+15. load 101 //starts while cycle
+16. ble 26 //goeas to the end of the program when n<=0, ble means below or equal 0
+17. load 102
+18. sub= 1
+19. store 102 //p--
+20. load@ 102 //load *p
+21. write  //prints the p
+22. load 101
+23. sub= 1
+24. store 101 //n--
+25. br 16 //goes back to row with BLE 
+26. end //finishes the program

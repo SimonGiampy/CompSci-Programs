@@ -1,0 +1,32 @@
+//write a program that reads a sequence of positive integers, and sum them until there is a number <= 0. prints the sum calculated to the stdout
+unsigned int n = 0, sum = 0;
+while (n>0) {
+sum+=n;
+scanf("%d", &n);
+}
+printf("%d", sum);
+
+translation (acc = accumulatore):
+
+1. load= 0 //acc=0
+2. store 101 //sum = acc
+3. add 101 //acc = s + acc
+4. store 101 //s = acc
+5. read //scanf = acc
+6. bg 3
+7. load 101
+8. write //prints to output value acc
+9. end
+
+alternative:
+
+1. load= 0
+2. store 101
+3. read
+4. ble 8 //below or equal to 0, goes to line 8
+5. add 101
+6. store 101
+7. br 3 //goes back to line 3
+8. load 101 //takes the value in cell 101
+9. write //output the value loaded (the cell 101)
+10. end

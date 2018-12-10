@@ -1,0 +1,42 @@
+linguaggio macchina
+
+scanf("%d", &x);
+scanf("%d", &y);
+scanf("%d", x+y);
+
+translation:
+
+READ legge primo numero nell'accumulatore
+STORE 101 mette il primo numero nella cella di memoria 101
+READ legge il secondo numero nell'accumulatore
+ADD 101 somma il valore dell'accumulatore nella cella 101
+WRITE scrive il contenuto dell'accumulatore
+END termina l'esecuzione del programma
+
+esempio2: programmma che legge in input un numero n, e poi fa la somma di n numeri inseriti in input
+
+scanf(“%d”,&n);
+s=0;
+for (i=0; i<n; i++) {
+    scanf(“%d”,&x);
+    s = s + x;
+}
+printf(“%d”,s);
+
+translation:
+1. READ
+2. STORE 101
+3. LOAD= 0 carico lo 0 nell'accumulatore con indirizzamento esplicito
+4. STORE 102 salvo il valore nell'accumulatore (0) nella cella di memoria specifica n.102
+//istruzioni 3 e 4 corrispondono all'istruzione s=0 in C
+5. LOAD 101
+6. BEQ 13
+7. SUB= 1
+8. STORE 101
+9. READ
+10. ADD 102
+11. STORE 102
+12. BR 5
+13. LOAD 102
+14. WRITE
+15. END
