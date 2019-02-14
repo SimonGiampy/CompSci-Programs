@@ -1,0 +1,55 @@
+Esercizio 1 (8 punti)
+
+A. Definire il tipo di dato rotta che consente di rappresentare una rotta aerea, specificando: codice
+aeroporti di partenza e di destinazione (i codici degli aeroporti sono 3 lettere) e distanza in miglia della
+rotta (numero intero).
+B. Scrivere un programma C che dichiari un array di tipo rotta di dimensione 100 e ne acquisisca da
+tastiera il contenuto; quindi, chieda di inserire da tastiera il codice di un aeroporto di partenza e
+stampi a video il codice dell’aeroporto di destinazione più vicino in miglia.
+Nel caso ci fossero più aeroporti di destinazioni alla stessa distanza minima, è sufficiente stamparne
+uno. Se invece non esistesse alcun elemento dell’array di tipo rotta con l’aeroporto di partenza
+richiesto, si stampi un messaggio di errore.
+
+soluzione:
+
+#include <stdio.h>
+#include <string.h>
+
+struct rotta {
+    char partenza[4];  //errore: avevo definito grandezza array = 3, invece di 4 (va incluso il carattere terminatore)
+    char arrivo[4]; /stesso errore qua
+    int distanza;
+} volo;
+
+int main() {
+volo rotte[100];
+for (int i=0; i<100; i++) {
+printf("inserisci distanza: ");
+scanf("%d", &rotte[i].distanza);
+print("da dove parti? ");
+scanf("%s", rotte[i].partenza);
+printf("dove atterri? ");
+scanf("%s", rotte[i].arrivo);
+}
+
+char anal[3], butt[3];
+printf("quale aeroporto analizzo?: ");
+scanf("%s", anal);
+int min = 0;
+for (int i=0; i<100; i++) {
+    if (!strcmp(rotte[i].partenza, anal)) {
+        if (min == 0) {
+            min = rotte[i].distanza;
+        } else if (rotte[i].distanza <= min) {
+            min = rotte[i].distanza;
+            butt = rotte[i].arrivo;
+        }
+    }
+}
+if (min==0) {
+printf("non ho trovato corrispondenze");
+} else {
+printf("codice aeroporto più vicino è: %s", butt);
+}
+
+}

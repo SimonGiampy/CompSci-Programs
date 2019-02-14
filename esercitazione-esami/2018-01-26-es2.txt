@@ -1,0 +1,38 @@
+esercizio 2 (9 punti)
+Scrivere una funzione C che riceve in ingresso due teste di liste contenenti numeri interi (scrivere anche le
+eventuali dichiarazioni di tipo) e restituisce 1 se la prima lista è strettamente contenuta nell’altra (cioè tutti gli
+elementi della prima lista appartengono anche alla seconda) o 0 altrimenti. Ciascuna lista non contiene
+elementi ripetuti e i suoi elementi non sono ordinati.
+
+struct list {
+int num;
+struct list *next; //errore: definizione di puntatore implica che l'asterisco va messo prima del nome della variabile
+};
+typedef struct list *lista; //errore: la lista va ridefinita come *lista, in quanto è un puntatore all'inizio della lista. (avevo scritto lista, e non *lista)
+
+int function(lista listA, lista listB) {
+
+//errore va implementate una lista temporanea che ha lo stesso valore di listb, e che viene iterata nel ciclo while interno
+//se non viene implementata questa variabile, scorre per la lunghezza della lista a partire da dove si esare fermato prima,
+//senza ricominciare da capo a leggere la lista b per intero dall'inizio. il risultato è che riparte la ricerca del numero successivo in b
+//solo da dove si era fermato prima
+int problem = 1;
+while (listA != NULL) { //poteva essere ottimizzato un pochino mettendo il controllo di condizione all'interno del while stesso, non in un if innestato
+    while (listB != NULL && problem == 1) {
+        if (listA->num == listB->num) {
+            problem = 0;
+        } else {
+            listB = listB->next;
+            problem = 1;
+        }
+    }
+if (problem == 1) {
+    printf("lista a non è strettamente contenuta in b");
+    return 0;
+}
+listA = listA->next;
+problem = 0;
+}
+printf("lista a non è strettamente contenuta in b");
+}
+}

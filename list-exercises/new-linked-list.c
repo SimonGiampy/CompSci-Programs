@@ -2,7 +2,7 @@
    this is a new exercise with linked list but the main struct has 3 pointers to 3 other struct. there is a triple recursion
    this exercise shows how to handle multiple pointers in a single struct and their data
    it adds some elements in the linked list, then it prints every information which comes in with every element
-   every elemtent is a number, wich can be linked to other numbers in the list whether it's even or odd
+   every elemtent is a number, which can be linked to other numbers in the list whether it's even or odd
  */
 
 #include <stdlib.h>
@@ -10,7 +10,7 @@
 
 struct node { //new kind of linked list, with 3 links
 	int data;
-	struct node *next; //next element in the list
+	struct node next*; //next element in the list
 	struct node *nextEven; //points to the next EVEN integer in the list. if there aren't at all, it points to null
 	struct node *nextOdd; //points to the next ODD integer in the list. if there aren't at all, it points to null
 };

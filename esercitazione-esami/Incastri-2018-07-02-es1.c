@@ -7,6 +7,7 @@
 
    Il rompicapo viene risolto se tutti i pezzi vengono posizionati sulla griglia, come nel seguente esempio (attenzione,
    perché la soluzione sia valida NON è necessario che la griglia sia completamente piena):
+
    Si assuma di rappresentare la griglia 5x5 nella memoria del calcolatore come una matrice di interi, in cui il valore 0 è usato
    per rappresentare una cella vuota e il valore 1 per rappresentare una cella occupata; inoltre si assuma di rappresentare
    con il valore 1, 2 e 3 rispettivamente i pezzi di forma quadrata, barra verticale e barra orizzontale.
@@ -29,61 +30,91 @@
    Note. Il problema può essere risolto ricorsivamente: è possibile posizionare sulla griglia G, i pezzi contenuti nel
    vettore p, se esiste almeno una posizione <i,j> di G dove può essere posizionato il primo pezzo di p ed è possibile
    posizionare tutti i rimanenti pezzi in p nella griglia G (in cui è stato aggiunto il primo pezzo in posizione <i,j>).
-
-   pezzi: 1 se quadrato (2x2), 2 se verticale (1x3), 3 se orizzontale (3x1)
  */
 
+//solve here
+//0: cell is empty
+//1: cell is full
+#include <stdio.h>
+int fit(int G[5][5], int p, int i, int j);
+int solve(int G[5][5], int p[], int npezzi);
 
-int fit(int matrix[5][5], int p, int i, int j) {
-
-	if (i<0 || j<0 || i>4 || j>4) {
-		return 0;
-	}
-
-	if (matrix[i][j] != 0) {
-		return 0;
-	}
-
-	if (p == 1) {
-		//i+1<5 and j+1<5 checks the border of the matrix, so there isn't any bug that access outside the borders of the matrix
-		//the other conditions check if the adjacent cells are free and not occupied by any other piece
-		return i+1<5 && j+1<5 && matrix[i][j+1] == 0 && matrix[i+1][j] == 0 && matrix[i+1][j+1] == 0; //return 1 if the condition is met (true), otherwise 0
-	}
-
-	if (p == 2) {
-		//other kind of piece of the puzzle
-	}
-
-	//TODO continue this program
+int main() {
+    int mat[5][5] = {{0,0,0,0,0},{0,0,0,0,0},{0,0,0,0,0},{0,0,0,0,0},{0,0,0,0,0}};
+    int pieces[8] = {3,2,3,3,3,1,2,3};
+    int npezzi = 8;
+    printf("solvable? \n", solve(mat, pieces, npezzi));
+    return 0;
 }
 
+int fit(int G[5][5], int p, int i, int j)
+{
+if
+(i<0 || j<0 || i>4
+return 0;
+if (p==1)
+if (i<4 && j<4)
+return (G[i][j]==0
+if (p==2)
+if (i<3)
+return (G[i][j]==0
+if (p==3)
+if (j<3)
+return (G[i][j]==0
+}
 
-int solve(int matrix[5][5], int p[], int nPieces) {
-	int i = 0, j = 0, found = 0;
-	if (nPieces == 1) {
-		for (i = 0; i<4 && found == 0; i++) {
-			for (j=0; j<4 && found == 0; j++) {
-				if (fit (matrix, p[0], i, j) == 1) {
-					found = 1;
-				}
+int solve(int G[5][5], int p[], int npezzi)
+{
+if (npezzi==0)
+return 1;
+else
+{
+int i,j;
+for (i=0; i<5; i++)
+for (j=0; j<5; j++)
+if (addp(G,p[0],i,j))
+{
+if (solve(G,p+1,npezzi-1))
+{
+removep(G,p[0],i,j);
+return 1;
+}
+else
+removep(G,p[0],i,j);
+}
+return 0;
+}
+}
+
+int myfit(int mat[5][5], int piece, int i, int j) {
+	//error here: i forgot to check these conditions
+	if (i<0 || j<0 || i>=5 || j>=5) {
+		return 0;
+	} else
+		switch (piece) {
+		case 1: { //square 2x2
+            if (!(i >=4 || j>=4)) //error: i forgot to check the boundaries of the piece
+			if (mat[i][j] == 0 && mat[i+1][j] == 0 && mat[i][j+1] == 0 && mat[i+1][j+1]) {
+				return 1; //good position
+			} else {
+				return 0; //bad position
 			}
-		}
-		return found;
-	} else {
-		for (i = 0; i<4 && found == 0; i++) {
-			for (j=0; j<4 && found == 0; j++) {
-				if (fit (matrix, p[0], i, j) == 1) {
-					addp(matrix, p[0], i, j); //fill up the matrix
-					found = solve(matrix, p+1, nPieces -1);
-					if (found == 1) {
-						return 1;
-					} else {
-						removep(matrix, p[0], i, j);
-					}
-				}
+		};
+		case 2: { //vertical, 1x3
+            if (!(i>=3))
+			if (mat[i][j] == 0 && mat[i+1][j] == 0 && mat[i+2][j]) {
+				return 1; //good position
+			} else {
+				return 0; //bad position
 			}
+		};
+		case 3: { //horizontal, 3x1
+            if (!(j>=3))
+			if (mat[i][j] == 0 && mat[i][j+1] == 0 && mat[i][j+2]) {
+				return 1; //good position
+			} else {
+				return 0; //bad position
+			}
+		};
 		}
-		solve(matrix, p+1, nPieces -1);
-	}
-	return 0;
 }

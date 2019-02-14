@@ -3,61 +3,58 @@
    Scrivere un programma che legge in input un numero intero positivo N e che costruisca la piramide di Fibonacci fino all’iterazione N.
    Salvare la serie su un file di nome fibonacci_N.txt, con N il numero scelto.
 
-   versione del professore, senza usare le formule del coefficiente binomiale, ma solo con le matrici
+   versione senza usare le formule del coefficiente binomiale, ma solo con le matrici
  */
 
 #include <stdio.h>
 
-void stampa_piramide(unsigned int n, FILE * f)
-{
-	int piramide[n][n];
-	unsigned int i, j;
-	// PRIMA RIEMPIO LA PIRAMIDE
-	// la prima riga contiene solo 1
-	piramide[0][0] = 1;
-	// scorro le righe, dalla seconda
-	for (i = 1; i < n; i++)
-	{
-		// la prima e l'ultima colonna stampate sono sempre 1
-		// per ogni riga della piramide
-		piramide[i][0] = 1;
-		piramide[i][i] = 1;
-		// scorro per ogni riga le colonne fino alla diagonale
-		for (j = 1; j < i; j++)
-		{
-			// calcolo la posizione basata sulla riga precedente
-			piramide[i][j] = piramide[i-1][j-1] + piramide[i-1][j];
-		}
+void stampa_piramide(unsigned int n, FILE * f);
 
+void stampa_piramide(unsigned int n, FILE * f) {
+	unsigned int pyramid[n+1][n+1];
+	unsigned int row = 0, column;
+	while (row <= n) {
+		column = 0;
+		while (column <= row) {
+			if (column == 0 || column == row) {
+				pyramid[row][column] = 1;
+			} else {
+				pyramid[row][column] = pyramid[row-1][column-1] + pyramid[row-1][column];
+			}
+			column++;
+		}
+		//if (row != n) {
+		//	pyramid[row][column] = 0;
+		//}
+		row++;
 	}
-	// POI LA STAMPO A FILE
-	for (i = 0; i < n; i++)
-	{
-		for (j = 0; j <= i; j++)
-			fprintf(f, "%d ",piramide[i][j]);
+	for (unsigned int i = 0, k; i <= n; i++) {
+		k = 0;
+		while (k <= i) {
+			fprintf(f, "%d ", pyramid[i][k]);
+			k++;
+		}
 		fprintf(f, "\n");
 	}
+
 	return;
 }
 
-int main()
-{
+int main() {
 	unsigned int N;
 	char nome_file[30];
-	FILE * f;
+	FILE *f;
 
 	printf("Inserire un numero intero positivo:\n");
 	scanf("%u", &N);
 
 	sprintf(nome_file, "fibonacci_%u.txt", N);
 	f = fopen(nome_file, "w");
-	if (f == NULL)
-	{
+	if (f == NULL) {
 		printf("Impossibile aprire il file %s\n", nome_file);
 		return 1;
 	}
 	stampa_piramide(N, f);
 	fclose(f);
-	f = NULL;
 	return 0;
 }

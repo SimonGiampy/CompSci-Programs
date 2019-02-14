@@ -1,0 +1,102 @@
+Esercizio 3 (8 punti)
+Definire un tipo di dato opportuno clista per realizzare una lista dinamica di caratteri (ogni elemento è un
+carattere) e serve per gestire sequenze di caratteri. Si definisce inciso una sequenza di caratteri compresa tra una
+parentesi tonda aperta ed una parentesi tonda chiusa. Implementare una funzione che riceve in ingresso un puntatore
+alla testa di una lista che rappresenta una sequenza di caratteri e la modifica sostituendo tutti gli incisi con uno
+spazio. Si supponga che la sequenza di caratteri nella lista in ingresso sia ben formata, cioè (i) ogni parentesi tonda
+aperta corrisponde ad una successiva parantesi tonda chiusa, (ii) non può esserci una parentesi tonda chiusa che non sia
+preceduta da una parentesi tonda aperta e (iii) non possono esserci altri incisi né parentesi all’interno di un inciso.
+
+second version of the program:
+
+struct clist {
+char alpha;
+struct clista *next;
+};
+typedef struct clist *list;
+
+void clean(list *list) {
+
+    list copy = *list;
+    list prev = NULL;
+
+    while (copy!=NULL) {
+
+    if (copy->alpha == '(') {
+        copy->alpha = ' ';
+
+        int found = 0;
+        while (!found) {
+            if (copy2->alpha == ')') {
+                copy2 = copy2->next;
+                found = 1;
+            } else {
+                copy2 = copy2->next;
+            }
+        }
+        copy->next = copy2;
+    } else {
+        //add in tail;
+
+        prev->alpha = copy->alpha;
+        prev->next = copy->next;
+        
+        copy = copy->next;
+    }
+
+
+
+    }
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+time: 22:00
+finished at 22.30
+
+struct clista {
+    char alpha;
+    struct clista *next;
+    struct clist *prev;
+};
+typedef struct clista *list;
+
+void function(list *list) { //modification of the list
+    list copy = *list;
+    list copy2 = copy;
+
+    while (copy != NULL) {
+        if (copy->alpha == '(') {
+            int found = 0;
+            copy2 = copy;
+            do {
+                if (copy2->alpha == ')') {
+                    found = 1;
+                } else {
+                    copy2 = copy2->next;
+                }
+            } while (!found);
+            copy->prev = copy;
+            copy = copy->next;
+            copy->alpha = ' ';
+            copy->prev = copy;
+            copy->next = copy2;
+            copy = copy->next;
+        } else {
+            copy->prev = copy;
+            copy = copy->next;
+        }
+    }
+}

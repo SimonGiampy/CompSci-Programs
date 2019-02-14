@@ -1,0 +1,5 @@
+this is the library content: contains 4 books
+book n.0: title is la magia del diocane, author is Cristo, published in year 1337
+book n.1: title is la magia del porcodio, author is Allah, published in year 420
+book n.2: title is la magia della madonna puttana, author is Gesù, published in year 2020
+book n.3: title is la magia del cazzo in culo, author is Buddha, published in year 6969

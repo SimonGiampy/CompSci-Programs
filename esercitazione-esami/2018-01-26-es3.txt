@@ -1,0 +1,19 @@
+Esercizio 4 (8 punti)
+Implementare in C la seguente funzione ricorsiva:
+int resto(int x, int y)
+La funzione riceve in ingresso due numeri interi x e y (con x>=0 e y>0), quindi calcola e restituisce il resto della
+divisione intera x/y. Nell’implementazione è possibile utilizzare solo gli operatori relazionali di confronto
+(>,<,>=,<=,== e !=), somma (+) e sottrazione (-). Non è possibile utilizzare altri operatori (/,*,%) o altre
+funzioni di libreria.
+
+int resto(int x, int y) { //ricorsiva
+
+//  7/2 --> resto 1
+
+if (x < y) {
+return x;
+} else {
+resto(x-y, y);
+}
+
+}
